@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activism Photography — Documenting so as to not forget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper:      #ede8df;
+      --paper-dark: #ddd7cc;
+      --paper-mid:  #c8c1b4;
+      --ink:        #140f0a;
+      --ink-mid:    #4a3f35;
+      --ink-light:  #8a7d72;
+      --red:        #c41a1a;
+      --red-dim:    #8a1212;
+      --red-glow:   rgba(196, 26, 26, 0.12);
+      --rule:       #b8b0a4;
+      --head: 'Barlow Condensed', sans-serif;
+      --body: 'Source Serif 4', serif;
+      --mono: 'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.6;
+    }
+
+    /* ─── NAV ──────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--ink);
+      border-bottom: 3px solid var(--red);
+      display: flex;
+      align-items: stretch;
+      height: 52px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      padding: 0 1.8rem;
+      border-right: 1px solid #2a2018;
+      text-decoration: none;
+    }
+
+    .nav-brand-text {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--paper);
+    }
+
+    .nav-brand-text span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      align-items: stretch;
+      list-style: none;
+      margin-left: auto;
+    }
+
+    .nav-links li { display: flex; }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      padding: 0 1.4rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      border-left: 1px solid #2a2018;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--paper); background: #1e1812; }
+    .nav-links a.cta { color: var(--red); }
+    .nav-links a.cta:hover { background: var(--red); color: var(--paper); }
+
+    /* ─── TICKER ───────────────────────────────────── */
+    .ticker {
+      position: fixed;
+      top: 52px; left: 0; right: 0;
+      z-index: 190;
+      background: var(--red);
+      height: 26px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ticker-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--red-dim);
+      padding: 0 0.8rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      border-right: 1px solid var(--red-dim);
+    }
+
+    .ticker-track {
+      display: flex;
+      animation: ticker 30s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker-item {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(237,232,223,0.9);
+      padding: 0 2.5rem;
+    }
+
+    .ticker-item::before { content: '◆  '; }
+
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 78px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 60px,
+          rgba(255,255,255,0.02) 60px,
+          rgba(255,255,255,0.02) 61px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.015) 40px,
+          rgba(255,255,255,0.015) 41px
+        );
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: appear 0.4s ease forwards 0.3s;
+    }
+
+    .hero-title {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0;
+      animation: appear 0.5s ease forwards 0.5s;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-light);
+    }
+
+    .hero-rule {
+      width: 100%;
+      height: 2px;
+      background: var(--red);
+      margin: 1.8rem 0;
+      opacity: 0;
+      animation: appear 0.4s ease forwards 0.7s;
+    }
+
+    .hero-tagline {
+      font-family: var(--body);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+      max-width: 340px;
+      opacity: 0;
+      animation: appear 0.5s ease forwards 0.9s;
+    }
+
+    .hero-meta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: appear 0.5s ease forwards 1.1s;
+    }
+
+    .hero-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #4a3f35;
+    }
+
+    .meta-val {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-light);
+    }
+
+    .hero-right {
+      background: var(--paper-dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-sheet {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 3px;
+      width: 100%;
+      height: 100%;
+      padding: 12px;
+      position: absolute;
+      inset: 0;
+    }
+
+    .cs-frame {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .cs-frame:hover { transform: scale(1.03); z-index: 2; }
+
+    .cs-frame::before {
+      content: attr(data-n);
+      position: absolute;
+      bottom: 4px; right: 5px;
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.05em;
+    }
+
+    .cs-frame.speed::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          170deg,
+          transparent 0px,
+          transparent 4px,
+          rgba(255,255,255,0.04) 4px,
+          rgba(255,255,255,0.04) 5px
+        );
+    }
+
+    .cs-frame.featured {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .cs-frame .scene-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.4rem 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      color: rgba(237,232,223,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    }
+
+    .cs-frame.f1  { background: linear-gradient(160deg, #0a0804 30%, #1c1206 100%); }
+    .cs-frame.f2  { background: linear-gradient(200deg, #060b08 30%, #0c1a10 100%); }
+    .cs-frame.f3  { background: linear-gradient(180deg, #0c0808 30%, #200808 100%); }
+    .cs-frame.f4  { background: linear-gradient(140deg, #080c10 30%, #0a0e16 100%); }
+    .cs-frame.f5  { background: linear-gradient(190deg, #060a06 30%, #0c140c 100%); }
+    .cs-frame.f6  { background: linear-gradient(170deg, #0e0808 30%, #1a0c0c 100%); }
+    .cs-frame.f7  { background: linear-gradient(155deg, #080808 30%, #141414 100%); }
+    .cs-frame.f8  { background: linear-gradient(175deg, #0c0a08 30%, #1a1410 100%); }
+    .cs-frame.f9  { background: linear-gradient(165deg, #08080c 30%, #10101c 100%); }
+    .cs-frame.f10 { background: linear-gradient(185deg, #060806 30%, #0e140e 100%); }
+
+    .strip-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .strip-text {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.07);
+      white-space: nowrap;
+      transform: rotate(-15deg);
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTIONS ─────────────────────────────────── */
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-wrap + .section-wrap {
+      border-top: 1px solid var(--rule);
+    }
+
+    .dateline {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-hed {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-deck {
+      font-family: var(--body);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--ink-mid);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .col-rule {
+      border: none;
+      border-top: 2px solid var(--ink);
+      margin: 1rem 0 2rem;
+    }
+
+    /* ─── GALLERY ──────────────────────────────────── */
+    #gallery { background: var(--ink); }
+
+    #gallery .section-wrap { border-top: none; }
+
+    #gallery .dateline { color: var(--red); }
+    #gallery .section-hed { color: var(--paper); }
+    #gallery .section-deck { color: var(--ink-light); }
+    #gallery .col-rule { border-top-color: #2a2018; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3px;
+    }
+
+    .g-item {
+      background: #0c0906;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .g-item:nth-child(1)  { grid-column: span 8; }
+    .g-item:nth-child(2)  { grid-column: span 4; }
+    .g-item:nth-child(3)  { grid-column: span 4; }
+    .g-item:nth-child(4)  { grid-column: span 4; }
+    .g-item:nth-child(5)  { grid-column: span 4; }
+    .g-item:nth-child(6)  { grid-column: span 7; }
+    .g-item:nth-child(7)  { grid-column: span 5; }
+
+    .g-item-inner {
+      height: 240px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s;
+    }
+
+    .g-item:nth-child(1) .g-item-inner { height: 360px; }
+    .g-item:nth-child(6) .g-item-inner { height: 280px; }
+
+    .g-item:hover .g-item-inner { transform: scale(1.04); }
+
+    .g-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 50%, rgba(0,0,0,0.85) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+    }
+
+    .g-item:hover .g-overlay { opacity: 1; }
+
+    .g-caption {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: rgba(237,232,223,0.8);
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+    }
+
+    .g-caption strong {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--paper);
+      margin-bottom: 0.2rem;
+    }
+
+    /* ─── GALLERY ARCHIVE ROW ──────────────────────── */
+    .gallery-archive-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 2rem;
+      border: 1px solid #2a2018;
+      width: fit-content;
+    }
+
+    .archive-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #4a3f35;
+      padding: 0.5rem 1rem;
+      border-right: 1px solid #2a2018;
+      flex-shrink: 0;
+    }
+
+    .archive-btn {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1.2rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      border-right: 1px solid #2a2018;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .archive-btn:last-child { border-right: none; }
+    .archive-btn:hover { background: #1a1410; color: var(--paper); }
+
+    /* ─── ABOUT ────────────────────────────────────── */
+    .other-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    #about .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) { #about .about-layout { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .about-portrait {
+      background: var(--ink);
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portrait-lines {
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(255,255,255,0.015) 3px,
+          rgba(255,255,255,0.015) 4px
+        );
+    }
+
+    .portrait-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 0.7rem 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: rgba(237,232,223,0.6);
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+    }
+
+    .portrait-caption em { color: rgba(237,232,223,0.35); }
+
+    .about-body .pull-quote {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      color: var(--ink);
+      border-left: 4px solid var(--red);
+      padding-left: 1.2rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .about-body p {
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .about-body p strong { color: var(--ink); font-weight: 600; }
+
+    /* ─── PRINTS ───────────────────────────────────── */
+    #prints { background: var(--paper-dark); }
+
+    .prints-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0;
+      border: 1px solid var(--rule);
+      margin-top: 2rem;
+    }
+
+    .print-item {
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 1.8rem;
+      background: var(--paper);
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .print-item:hover { background: var(--paper-dark); }
+
+    .print-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--ink);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .print-thumb-text {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: 2rem;
+      color: rgba(255,255,255,0.05);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .print-item:nth-child(1) .print-thumb { background: linear-gradient(160deg, #120a04, #0a0602); }
+    .print-item:nth-child(2) .print-thumb { background: linear-gradient(150deg, #060c08, #030806); }
+    .print-item:nth-child(3) .print-thumb { background: linear-gradient(170deg, #0c0804, #060402); }
+
+    .print-edition {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.3rem;
+    }
+
+    .print-title {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      color: var(--ink);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.3rem;
+    }
+
+    .print-meta {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--ink-light);
+      margin-bottom: 0.8rem;
+      line-height: 1.7;
+    }
+
+    .print-price {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--ink);
+    }
+
+    .print-cta {
+      display: block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .print-cta:hover { background: var(--red); }
+
+    /* ─── BOOKING ──────────────────────────────────── */
+    #booking .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) { #booking .booking-layout { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .booking-types { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
+
+    .booking-type {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .bt-num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .bt-name {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .bt-desc {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
+    .booking-form { display: flex; flex-direction: column; gap: 0; }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--rule);
+      padding: 1rem 0;
+      gap: 0.3rem;
+    }
+
+    .form-lbl {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    .form-inp, .form-sel, .form-txt {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--body);
+      font-size: 0.9rem;
+      color: var(--ink);
+      padding: 0.2rem 0;
+      width: 100%;
+    }
+
+    .form-inp::placeholder, .form-txt::placeholder { color: var(--paper-mid); }
+    .form-sel { cursor: pointer; }
+    .form-txt { resize: vertical; min-height: 80px; }
+
+    .form-row:focus-within .form-lbl { color: var(--red); }
+
+    .submit-row {
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .submit-note {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--ink-light);
+      letter-spacing: 0.08em;
+    }
+
+    .btn-submit {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover { background: var(--red); }
+
+    #booking-feedback {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--red);
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      border-top: 3px solid var(--red);
+      padding: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: var(--head);
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--paper);
+    }
+
+    .footer-brand span { color: var(--red); }
+
+    .footer-note {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: #4a3f35;
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: repeat(6, 1fr); }
+      .g-item:nth-child(1) { grid-column: span 6; }
+      .g-item:nth-child(2), .g-item:nth-child(3), .g-item:nth-child(4), .g-item:nth-child(5) { grid-column: span 3; }
+      .g-item:nth-child(6), .g-item:nth-child(7) { grid-column: span 6; }
+      .gallery-archive-row { flex-wrap: wrap; }
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--paper-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--red-dim); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-brand">
+      <span class="nav-brand-text">Activism<span>.</span>Photography</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#prints">Prints</a></li>
+      <li><a href="#booking" class="cta">Book</a></li>
+    </ul>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <span class="ticker-label">AP Wire</span>
+    <div class="ticker-track" id="ticker">
+      <span class="ticker-item">Appalachian hillclimb season — new coverage available</span>
+      <span class="ticker-item">Motorsports + environmental documentary work</span>
+      <span class="ticker-item">Based in Western North Carolina</span>
+      <span class="ticker-item">Limited edition prints now available</span>
+      <span class="ticker-item">Inquiries open for 2026 season</span>
+      <span class="ticker-item">Covering the Appalachian series and beyond</span>
+      <span class="ticker-item">Activism Photography — Fisher Armstrong</span>
+      <span class="ticker-item">Appalachian hillclimb season — new coverage available</span>
+      <span class="ticker-item">Motorsports + environmental documentary work</span>
+      <span class="ticker-item">Based in Western North Carolina</span>
+      <span class="ticker-item">Limited edition prints now available</span>
+      <span class="ticker-item">Inquiries open for 2026 season</span>
+      <span class="ticker-item">Covering the Appalachian series and beyond</span>
+      <span class="ticker-item">Activism Photography — Fisher Armstrong</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-left">
+      <p class="hero-kicker">Visual &amp; Documentary Practice</p>
+      <h1 class="hero-title">Activism<br><em>Photo</em><br>graphy</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Documenting so as to not forget.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="meta-label">Disciplines</span>
+          <span class="meta-val">Motorsports / Environmental</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Based</span>
+          <span class="meta-val">Western North Carolina</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Territory</span>
+          <span class="meta-val">Appalachian &amp; Southeast</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="contact-sheet">
+        <div class="cs-frame featured f1 speed" data-n="01">
+          <div class="strip-overlay"><span class="strip-text">Activism Photography</span></div>
+          <span class="scene-label">Autocross — Launch sequence</span>
+        </div>
+        <div class="cs-frame f2" data-n="02"><span class="scene-label">Hillclimb stage</span></div>
+        <div class="cs-frame f3" data-n="03"><span class="scene-label">Treeline, Blue Ridge</span></div>
+        <div class="cs-frame f4 speed" data-n="04"><span class="scene-label">Corner exit — N.O.V.A.</span></div>
+        <div class="cs-frame f5" data-n="05"><span class="scene-label">River basin, morning</span></div>
+        <div class="cs-frame f6" data-n="06"><span class="scene-label">Pit lane</span></div>
+        <div class="cs-frame f7 speed" data-n="07"><span class="scene-label">Time trial — stage 4</span></div>
+        <div class="cs-frame f8" data-n="08"><span class="scene-label">Ridgeline survey</span></div>
+        <div class="cs-frame f9" data-n="09"><span class="scene-label">Fog, early morning</span></div>
+        <div class="cs-frame f10 speed" data-n="10"><span class="scene-label">Paddock, late day</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div id="gallery">
+    <div class="section-wrap">
+      <p class="dateline">Selected work</p>
+      <h2 class="section-hed">Gallery</h2>
+      <hr class="col-rule" />
+
+      <div class="gallery-grid">
+        <div class="g-item" data-cat="motorsports">
+          <div class="g-item-inner">
+            <img src="Mats/25 PINE - BMW OFF the line .JPG" alt="auble off da line" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>Launch — Hillclimb, AHS1 Pine MTN</strong>
+              Canon EOS R · 1/1600s · f/4 · ISO 400
+            </div>
+          </div>
+        </div>
+        <div class="g-item" data-cat="environmental">
+          <div class="g-item-inner">
+            <img src="Mats/formV.JPG" alt="kidsondock" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>Formula Vee At the Fanfest in Pineville KY</strong>
+              Canon EOS T3i · 1/250s · f/8 · ISO 1100
+            </div>
+          </div>
+        </div>
+        <div class="g-item" data-cat="motorsports">
+          <div class="g-item-inner">
+            <img src="Mats/rickcone.jpg" alt="2026 Charlotte National SOLO" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>Rick Cone on Course In Charlotte (SOLO)</strong>
+              Canon EOS R · 1/2000s · f/2.8 · ISO 800
+            </div>
+          </div>
+        </div>
+        <div class="g-item" data-cat="environmental">
+          <div class="g-item-inner">
+            <img src="Mats/s2k.JPG" alt="2026DYW Pic2" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>Honda S2000 On the Blue Ridge Parkway</strong>
+              Canon EOS R · 4s · f/11 · ISO 100
+            </div>
+          </div>
+        </div>
+        <div class="g-item" data-cat="motorsports">
+          <div class="g-item-inner">
+            <img src="Mats/purpmiat.JPG" alt="2026DYW Pic2" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>2004 (NB) Miata @ Home</strong>
+              Canon EOS T3I · 1/1250s · f/5.6 · ISO 640
+            </div>
+          </div>
+        </div>
+        <div class="g-item" data-cat="environmental">
+          <div class="g-item-inner">
+            <img src="Mats/25 PINE - Lotus Rear Qtr .JPG" alt="2026DYW Pic2" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>Flag Rock Hillclimb - YR4</strong>
+              Canon EOS R · 1/500s · f/6.3 · ISO 400
+            </div>
+          </div>
+        </div>
+        <div class="g-item" data-cat="motorsports">
+          <div class="g-item-inner">
+            <img src="Mats/_MG_7495.JPG" alt="26Targa Texas Day2" class="other-img" />
+          </div>
+          <div class="g-overlay">
+            <div class="g-caption">
+              <strong>2026 Targa Texas-Ish Day 2 Hallett</strong>
+              Canon EOS T3I · 1/320s · f/4 · ISO 200
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Archive links -->
+      <div class="gallery-archive-row">
+        <span class="archive-label">Full archive →</span>
+        <a href="https://instagram.com/YOUR_HANDLE" target="_blank" class="archive-btn">Instagram</a>
+        <a href="https://YOUR_HANDLE.smugmug.com" target="_blank" class="archive-btn">SmugMug</a>
+        <a href="https://flickr.com/photos/YOUR_HANDLE" target="_blank" class="archive-btn">Flickr</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="section-wrap">
+      <p class="dateline">Profile — Fisher Armstrong</p>
+      <h2 class="section-hed">About</h2>
+      <p class="section-deck">Photographer, Environmentalist, Engineer, and Developer</p>
+      <hr class="col-rule" />
+
+      <div class="about-layout">
+        <div>
+          <div class="about-portrait">
+            <img src="Mats/PFP.JPEG" alt="Fisher Armstrong" class="portrait-img" />
+            <div class="portrait-lines"></div>
+            <div class="portrait-caption">
+              Fisher Armstrong<br>
+              <em>Appalachian Native & Do-er of Things</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-body">
+          <div class="pull-quote">"The photograph is proof the moment happened."</div>
+          <p>
+            <strong>ActivismPhotography</strong> is the visual and documentary practice of
+            Fisher Armstrong - a photographer and engineer working at the intersection of
+            motorsports culture, environmental record, and ethical representation. Based in
+            Western North Carolina, the work draws directly from the landscape and community
+            that surrounds it.
+          </p>
+          <p>
+            The practice is built around two disciplines that, on the surface, look nothing
+            alike. The first is grassroots motorsports — autocross, hillclimb, time trial —
+            the compressed, chaotic, unsponsored racing that happens at the edges of the
+            calendar. The second is the Appalachian environment itself: the ridgelines,
+            river basins, fog valleys, and treelines of Western NC and the surrounding
+            mountain region.
+          </p>
+          <p>
+            Both disciplines demand the same thing from the photographer: attention to what
+            is actually happening, not what would make a clean composition. A car at full
+            commitment through a hillclimb stage looks different from a clean editorial
+            shot. A ridgeline at dawn looks different from a landscape postcard. The work
+            tries to hold that difference rather than erase it.
+          </p>
+          <p>
+            The practice operates under a principle of <strong>narrative depth over
+            aesthetics</strong>. Every image is part of a historical record. The archive
+            is organized with that in mind — structured, searchable, and built to last.
+            Nothing is shot for the sake of the shot alone.
+          </p>
+          <p>
+            Armstrong also competes in the events he documents through
+            <strong>Activism Motorsports</strong>, which gives the motorsports work
+            a rare inside perspective — the understanding of what a driver experiences
+            informs what a camera should be looking for.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINTS -->
+  <div id="prints">
+    <div class="section-wrap">
+      <p class="dateline">Limited editions — Fine art prints</p>
+      <h2 class="section-hed">Print Shop</h2>
+      <p class="section-deck">Archival giclée prints on fine art paper. Numbered and signed.</p>
+      <hr class="col-rule" />
+
+      <div class="prints-grid">
+        <div class="print-item">
+          <div class="print-thumb"><span class="print-thumb-text">01</span></div>
+          <p class="print-edition">Edition of 25 — Motorsports</p>
+          <h3 class="print-title">Autocross Launch Sequence</h3>
+          <p class="print-meta">16×20 in · Archival giclée<br>Hahnemühle Photo Rag · Signed</p>
+          <p class="print-price">$180</p>
+          <a href="#booking" class="print-cta">Inquire →</a>
+        </div>
+        <div class="print-item">
+          <div class="print-thumb"><span class="print-thumb-text">02</span></div>
+          <p class="print-edition">Edition of 15 — Environmental</p>
+          <h3 class="print-title">Blue Ridge @ Dawn</h3>
+          <p class="print-meta">20×24 in · Archival giclée<br>Hahnemühle Photo Rag · Signed</p>
+          <p class="print-price">$240</p>
+          <a href="#booking" class="print-cta">Inquire →</a>
+        </div>
+        <div class="print-item">
+          <div class="print-thumb"><span class="print-thumb-text">03</span></div>
+          <p class="print-edition">Edition of 20 — Motorsports</p>
+          <h3 class="print-title">Flag Rock Hillclimb Stage</h3>
+          <p class="print-meta">16×20 in · Archival giclée<br>Hahnemühle Photo Rag · Signed</p>
+          <p class="print-price">$180</p>
+          <a href="#booking" class="print-cta">Inquire →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING -->
+  <div id="booking">
+    <div class="section-wrap">
+      <p class="dateline">Inquiries — Booking &amp; licensing</p>
+      <h2 class="section-hed">Book a Shoot</h2>
+      <p class="section-deck">Open for event coverage, editorial licensing, and documentary commissions.</p>
+      <hr class="col-rule" />
+
+      <div class="booking-layout">
+        <div class="booking-info">
+          <div class="booking-types">
+            <div class="booking-type">
+              <span class="bt-num">01</span>
+              <div>
+                <p class="bt-name">Event Coverage</p>
+                <p class="bt-desc">Motorsports events, races, and championships — autocross, hillclimb, and time trial. Full-day or half-day coverage. RAW archive plus edited selects with same-week delivery. Travel available across the Appalachian region and Southeast.</p>
+              </div>
+            </div>
+            <div class="booking-type">
+              <span class="bt-num">02</span>
+              <div>
+                <p class="bt-name">Documentary Commission</p>
+                <p class="bt-desc">Multi-session, sustained documentary work for environmental, cultural, or organizational projects. Built for subjects that require return visits and patience rather than a single shoot. Conservation organizations, land trusts, and regional publications are welcome to reach out.</p>
+              </div>
+            </div>
+            <div class="booking-type">
+              <span class="bt-num">03</span>
+              <div>
+                <p class="bt-name">Editorial Licensing</p>
+                <p class="bt-desc">Print and digital licensing of existing archive images — motorsports and Appalachian environmental — for editorial, publishing, and commercial use. Contact for rates and usage terms. High-resolution files available immediately for licensed use.</p>
+              </div>
+            </div>
+            <div class="booking-type">
+              <span class="bt-num">04</span>
+              <div>
+                <p class="bt-name">Print Inquiry</p>
+                <p class="bt-desc">Questions about limited edition prints, custom sizes, or display licensing. All prints are archival giclée on Hahnemühle Photo Rag, numbered and signed. Custom sizing and substrate options available on request.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="booking-form">
+            <div class="form-row">
+              <label class="form-lbl">Your name</label>
+              <input class="form-inp" type="text" id="b-name" placeholder="Full name" />
+            </div>
+            <div class="form-row">
+              <label class="form-lbl">Email address</label>
+              <input class="form-inp" type="email" id="b-email" placeholder="your@email.com" />
+            </div>
+            <div class="form-row">
+              <label class="form-lbl">Type of inquiry</label>
+              <select class="form-sel" id="b-type">
+                <option value="">Select one</option>
+                <option>Event Coverage</option>
+                <option>Documentary Commission</option>
+                <option>Editorial Licensing</option>
+                <option>Print Inquiry</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label class="form-lbl">Date / timeframe</label>
+              <input class="form-inp" type="text" id="b-date" placeholder="e.g. June 2026, ongoing, flexible" />
+            </div>
+            <div class="form-row">
+              <label class="form-lbl">Tell me about the project</label>
+              <textarea class="form-txt" id="b-msg" placeholder="Event, location, scope, any relevant details..."></textarea>
+            </div>
+            <div class="submit-row">
+              <span class="submit-note">Response within 48 hours.</span>
+              <button class="btn-submit" onclick="handleBooking()">Send Inquiry</button>
+            </div>
+            <p id="booking-feedback"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-brand">Activism<span>.</span>Photography</p>
+      <p class="footer-note">© 2026 Fisher Armstrong · All rights reserved · Western North Carolina</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.g-item, .print-item, .booking-type').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      io.observe(el);
+    });
+
+    // Booking form
+    function handleBooking() {
+      const fb = document.getElementById('booking-feedback');
+      const name  = document.getElementById('b-name').value.trim();
+      const email = document.getElementById('b-email').value.trim();
+      const type  = document.getElementById('b-type').value;
+      const msg   = document.getElementById('b-msg').value.trim();
+
+      if (!name || !email || !type || !msg) {
+        fb.textContent = '— Please complete all fields before submitting.';
+        fb.style.color = 'var(--red)';
+        fb.style.display = 'block';
+        return;
+      }
+
+      fb.textContent = '✓ Inquiry received. You will hear back within 48 hours.';
+      fb.style.color = 'var(--ink-mid)';
+      fb.style.display = 'block';
+      ['b-name','b-email','b-msg'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('b-type').value = '';
+      document.getElementById('b-date').value = '';
+    }
+  </script>
+</body>
+</html>
