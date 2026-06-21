@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Activism Photography — Documenting so as to not forget</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Activism Photography — Documenting so as to not forget
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&amp;family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
   <style>
-    :root {
+   :root {
       --paper:      #ede8df;
       --paper-dark: #ddd7cc;
       --paper-mid:  #c8c1b4;
@@ -114,21 +116,6 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-    }
-
-    .ticker-label {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--paper);
-      background: var(--red-dim);
-      padding: 0 0.8rem;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-      border-right: 1px solid var(--red-dim);
     }
 
     .ticker-track {
@@ -266,7 +253,7 @@
     }
 
     .hero-right {
-      background: var(--paper-dark);
+      background: #0f0b08;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -278,95 +265,113 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(4, 1fr);
-      gap: 3px;
+      gap: 0px;
       width: 100%;
       height: 100%;
-      padding: 12px;
+      padding: 0px;
       position: absolute;
       inset: 0;
     }
 
     .cs-frame {
-      background: var(--ink);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.cs-frame img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+    z-index: 0;
+
+    transition: transform 0.4s ease;
+}
+
+.cs-frame:hover img {
+    transform: scale(1.03);
+}
+
+.scene-label,
+.strip-overlay {
+    position: absolute;
+    z-index: 2;
+}
+
+.scene-label {
+    left: 12px;
+    bottom: 12px;
+
+    padding: 4px 8px;
+
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    backdrop-filter: blur(4px);
+}
+
+.strip-overlay {
+    top: 12px;
+    left: 12px;
+}
+
+.strip-text {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+
+    .featured {
+        grid-column: span 2;
+        grid-row: span 2;
     }
 
-    .cs-frame:hover { transform: scale(1.03); z-index: 2; }
-
-    .cs-frame::before {
-      content: attr(data-n);
-      position: absolute;
-      bottom: 4px; right: 5px;
-      font-family: var(--mono);
-      font-size: 0.5rem;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.05em;
+    .f10 {
+        grid-column: span 2;
     }
 
-    .cs-frame.speed::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          170deg,
-          transparent 0px,
-          transparent 4px,
-          rgba(255,255,255,0.04) 4px,
-          rgba(255,255,255,0.04) 5px
-        );
-    }
+.cs-frame img {
+    position: absolute;
+    inset: 0;
 
-    .cs-frame.featured {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
+    width: 100%;
+    height: 100%;
 
-    .cs-frame .scene-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 0.4rem 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.48rem;
-      color: rgba(237,232,223,0.5);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: linear-gradient(transparent, rgba(0,0,0,0.6));
-    }
+    object-fit: cover;
+    object-position: center;
 
-    .cs-frame.f1  { background: linear-gradient(160deg, #0a0804 30%, #1c1206 100%); }
-    .cs-frame.f2  { background: linear-gradient(200deg, #060b08 30%, #0c1a10 100%); }
-    .cs-frame.f3  { background: linear-gradient(180deg, #0c0808 30%, #200808 100%); }
-    .cs-frame.f4  { background: linear-gradient(140deg, #080c10 30%, #0a0e16 100%); }
-    .cs-frame.f5  { background: linear-gradient(190deg, #060a06 30%, #0c140c 100%); }
-    .cs-frame.f6  { background: linear-gradient(170deg, #0e0808 30%, #1a0c0c 100%); }
-    .cs-frame.f7  { background: linear-gradient(155deg, #080808 30%, #141414 100%); }
-    .cs-frame.f8  { background: linear-gradient(175deg, #0c0a08 30%, #1a1410 100%); }
-    .cs-frame.f9  { background: linear-gradient(165deg, #08080c 30%, #10101c 100%); }
-    .cs-frame.f10 { background: linear-gradient(185deg, #060806 30%, #0e140e 100%); }
+    display: block;
 
-    .strip-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
+    z-index: 0;
 
-    .strip-text {
-      font-family: var(--head);
-      font-weight: 900;
-      font-size: 0.85rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.07);
-      white-space: nowrap;
-      transform: rotate(-15deg);
-    }
+    filter: brightness(0.85) contrast(1.05);
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.cs-frame:hover img {
+    transform: scale(1.03);
+    filter: brightness(0.95) contrast(1.08);
+}
 
     @keyframes appear {
       from { opacity: 0; transform: translateY(10px); }
@@ -862,7 +867,7 @@
       font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
-      color: #4a3f35;
+      color: #fff ;
     }
 
     /* ─── RESPONSIVE ───────────────────────────────── */
@@ -881,372 +886,616 @@
     ::-webkit-scrollbar-track { background: var(--paper-dark); }
     ::-webkit-scrollbar-thumb { background: var(--red-dim); }
   </style>
-</head>
-<body>
-
+ </head>
+ <body>
   <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-brand">
-      <span class="nav-brand-text">Activism<span>.</span>Photography</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#prints">Prints</a></li>
-      <li><a href="#booking" class="cta">Book</a></li>
-    </ul>
+   <a class="nav-brand" href="#hero">
+    <span class="nav-brand-text">
+     Activism
+     <span>
+      .
+     </span>
+     Photography
+    </span>
+   </a>
+   <ul class="nav-links">
+    <li>
+     <a href="#gallery">
+      Gallery
+     </a>
+    </li>
+    <li>
+     <a href="#about">
+      About
+     </a>
+    </li>
+    <li>
+     <a href="#prints">
+      Prints
+     </a>
+    </li>
+    <li>
+     <a class="cta" href="#booking">
+      Book
+     </a>
+    </li>
+   </ul>
   </nav>
-
   <!-- TICKER -->
   <div class="ticker">
-    <span class="ticker-label">AP Wire</span>
-    <div class="ticker-track" id="ticker">
-      <span class="ticker-item">Appalachian hillclimb season — new coverage available</span>
-      <span class="ticker-item">Motorsports + environmental documentary work</span>
-      <span class="ticker-item">Based in Western North Carolina</span>
-      <span class="ticker-item">Limited edition prints now available</span>
-      <span class="ticker-item">Inquiries open for 2026 season</span>
-      <span class="ticker-item">Covering the Appalachian series and beyond</span>
-      <span class="ticker-item">Activism Photography — Fisher Armstrong</span>
-      <span class="ticker-item">Appalachian hillclimb season — new coverage available</span>
-      <span class="ticker-item">Motorsports + environmental documentary work</span>
-      <span class="ticker-item">Based in Western North Carolina</span>
-      <span class="ticker-item">Limited edition prints now available</span>
-      <span class="ticker-item">Inquiries open for 2026 season</span>
-      <span class="ticker-item">Covering the Appalachian series and beyond</span>
-      <span class="ticker-item">Activism Photography — Fisher Armstrong</span>
-    </div>
+   <span class="ticker-label">
+   </span>
+   <div class="ticker-track" id="ticker">
+    <span class="ticker-item">
+     Appalachian hillclimb season — new coverage available
+    </span>
+    <span class="ticker-item">
+     Motorsports + environmental documentary work
+    </span>
+    <span class="ticker-item">
+     Based in Western North Carolina
+    </span>
+    <span class="ticker-item">
+     Limited edition prints now available
+    </span>
+    <span class="ticker-item">
+     Inquiries open for 2026 season
+    </span>
+    <span class="ticker-item">
+     Covering the Appalachian series and beyond
+    </span>
+    <span class="ticker-item">
+     Activism Photography — Fisher Armstrong
+    </span>
+    <span class="ticker-item">
+     Appalachian hillclimb season — new coverage available
+    </span>
+    <span class="ticker-item">
+     Motorsports + environmental documentary work
+    </span>
+    <span class="ticker-item">
+     Based in Western North Carolina
+    </span>
+    <span class="ticker-item">
+     Limited edition prints now available
+    </span>
+    <span class="ticker-item">
+     Inquiries open for 2026 season
+    </span>
+    <span class="ticker-item">
+     Covering the Appalachian series and beyond
+    </span>
+    <span class="ticker-item">
+     Activism Photography — Fisher Armstrong
+    </span>
+   </div>
   </div>
-
   <!-- HERO -->
   <div id="hero">
-    <div class="hero-left">
-      <p class="hero-kicker">Visual &amp; Documentary Practice</p>
-      <h1 class="hero-title">Activism<br><em>Photo</em><br>graphy</h1>
-      <div class="hero-rule"></div>
-      <p class="hero-tagline">Documenting so as to not forget.</p>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="meta-label">Disciplines</span>
-          <span class="meta-val">Motorsports / Environmental</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="meta-label">Based</span>
-          <span class="meta-val">Western North Carolina</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="meta-label">Territory</span>
-          <span class="meta-val">Appalachian &amp; Southeast</span>
-        </div>
-      </div>
+   <div class="hero-left">
+    <p class="hero-kicker">
+     Visual &amp; Documentary Practice
+    </p>
+    <h1 class="hero-title">
+     Activism
+     <br/>
+     <em>
+      Photo
+     </em>
+     <br/>
+     graphy
+    </h1>
+    <div class="hero-rule">
     </div>
-    <div class="hero-right">
-      <div class="contact-sheet">
-        <div class="cs-frame featured f1 speed" data-n="01">
-          <div class="strip-overlay"><span class="strip-text">Activism Photography</span></div>
-          <span class="scene-label">Autocross — Launch sequence</span>
-        </div>
-        <div class="cs-frame f2" data-n="02"><span class="scene-label">Hillclimb stage</span></div>
-        <div class="cs-frame f3" data-n="03"><span class="scene-label">Treeline, Blue Ridge</span></div>
-        <div class="cs-frame f4 speed" data-n="04"><span class="scene-label">Corner exit — N.O.V.A.</span></div>
-        <div class="cs-frame f5" data-n="05"><span class="scene-label">River basin, morning</span></div>
-        <div class="cs-frame f6" data-n="06"><span class="scene-label">Pit lane</span></div>
-        <div class="cs-frame f7 speed" data-n="07"><span class="scene-label">Time trial — stage 4</span></div>
-        <div class="cs-frame f8" data-n="08"><span class="scene-label">Ridgeline survey</span></div>
-        <div class="cs-frame f9" data-n="09"><span class="scene-label">Fog, early morning</span></div>
-        <div class="cs-frame f10 speed" data-n="10"><span class="scene-label">Paddock, late day</span></div>
-      </div>
+    <p class="hero-tagline">
+     Documenting so as to not forget.
+    </p>
+    <div class="hero-meta">
+     <div class="hero-meta-item">
+      <span class="meta-label">
+       Disciplines
+      </span>
+      <span class="meta-val">
+       Motorsports / Environmental
+      </span>
+     </div>
+     <div class="hero-meta-item">
+      <span class="meta-label">
+       Based
+      </span>
+      <span class="meta-val">
+       Western North Carolina
+      </span>
+     </div>
+     <div class="hero-meta-item">
+      <span class="meta-label">
+       Territory
+      </span>
+      <span class="meta-val">
+       Appalachian &amp; Southeast
+      </span>
+     </div>
     </div>
+   </div>
+   <div class="hero-right">
+    <div class="contact-sheet">
+     <div class="cs-frame featured f1 speed" data-n="01">
+      <img alt="Christina Haynes: High School Graduation" src="Mats/CLH Grad - 680.JPG"/>
+      <div class="strip-overlay">
+       <span class="strip-text">
+       </span>
+      </div>
+     </div>
+     <div class="cs-frame f2" data-n="02">
+      <img alt="Antique Hoosier Logo" src="Mats/25SOLONats-5804.JPG"/>
+     </div>
+     <div class="cs-frame f3" data-n="03">
+      <img alt="Treeline, Blue Ridge" src="Mats/kidsondock.JPG"/>
+     </div>
+     <div class="cs-frame f4 speed" data-n="04">
+      <img alt="Corner exit — N.O.V.A." src="Mats/_MG_7195.JPG"/>
+     </div>
+     <div class="cs-frame f5" data-n="05">
+      <img alt="River basin, morning" src="Mats/_MG_6301.JPG"/>
+     </div>
+     <div class="cs-frame f6" data-n="06">
+      <img alt="Pit lane" src="Mats/_MG_5118.JPG"/>
+     </div>
+     <div class="cs-frame f7 speed" data-n="07">
+      <img alt="Dog on Acadia MTN" src="Mats/_MG_5288.JPG"/>
+     </div>
+     <div class="cs-frame f8" data-n="08">
+      <img alt="Ridgeline survey" src="Mats/_MG_7495.JPG"/>
+     </div>
+     <div class="cs-frame f9" data-n="09">
+      <img alt="Fog, early morning" src="Mats/IMG_1808.JPG"/>
+     </div>
+    </div>
+   </div>
   </div>
-
   <!-- GALLERY -->
   <div id="gallery">
-    <div class="section-wrap">
-      <p class="dateline">Selected work</p>
-      <h2 class="section-hed">Gallery</h2>
-      <hr class="col-rule" />
-
-      <div class="gallery-grid">
-        <div class="g-item" data-cat="motorsports">
-          <div class="g-item-inner">
-            <img src="Mats/25 PINE - BMW OFF the line .JPG" alt="auble off da line" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>Launch — Hillclimb, AHS1 Pine MTN</strong>
-              Canon EOS R · 1/1600s · f/4 · ISO 400
-            </div>
-          </div>
-        </div>
-        <div class="g-item" data-cat="environmental">
-          <div class="g-item-inner">
-            <img src="Mats/formV.JPG" alt="kidsondock" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>Formula Vee At the Fanfest in Pineville KY</strong>
-              Canon EOS T3i · 1/250s · f/8 · ISO 1100
-            </div>
-          </div>
-        </div>
-        <div class="g-item" data-cat="motorsports">
-          <div class="g-item-inner">
-            <img src="Mats/rickcone.jpg" alt="2026 Charlotte National SOLO" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>Rick Cone on Course In Charlotte (SOLO)</strong>
-              Canon EOS R · 1/2000s · f/2.8 · ISO 800
-            </div>
-          </div>
-        </div>
-        <div class="g-item" data-cat="environmental">
-          <div class="g-item-inner">
-            <img src="Mats/s2k.JPG" alt="2026DYW Pic2" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>Honda S2000 On the Blue Ridge Parkway</strong>
-              Canon EOS R · 4s · f/11 · ISO 100
-            </div>
-          </div>
-        </div>
-        <div class="g-item" data-cat="motorsports">
-          <div class="g-item-inner">
-            <img src="Mats/purpmiat.JPG" alt="2026DYW Pic2" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>2004 (NB) Miata @ Home</strong>
-              Canon EOS T3I · 1/1250s · f/5.6 · ISO 640
-            </div>
-          </div>
-        </div>
-        <div class="g-item" data-cat="environmental">
-          <div class="g-item-inner">
-            <img src="Mats/25 PINE - Lotus Rear Qtr .JPG" alt="2026DYW Pic2" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>Flag Rock Hillclimb - YR4</strong>
-              Canon EOS R · 1/500s · f/6.3 · ISO 400
-            </div>
-          </div>
-        </div>
-        <div class="g-item" data-cat="motorsports">
-          <div class="g-item-inner">
-            <img src="Mats/_MG_7495.JPG" alt="26Targa Texas Day2" class="other-img" />
-          </div>
-          <div class="g-overlay">
-            <div class="g-caption">
-              <strong>2026 Targa Texas-Ish Day 2 Hallett</strong>
-              Canon EOS T3I · 1/320s · f/4 · ISO 200
-            </div>
-          </div>
-        </div>
+   <div class="section-wrap">
+    <p class="dateline">
+     Selected work
+    </p>
+    <h2 class="section-hed">
+     Gallery
+    </h2>
+    <hr class="col-rule"/>
+    <div class="gallery-grid">
+     <div class="g-item" data-cat="motorsports">
+      <div class="g-item-inner">
+       <img alt="auble off da line" class="other-img" src="Mats/25 PINE - BMW OFF the line .JPG">
+       </img>
       </div>
-
-      <!-- Archive links -->
-      <div class="gallery-archive-row">
-        <span class="archive-label">Full archive →</span>
-        <a href="https://instagram.com/YOUR_HANDLE" target="_blank" class="archive-btn">Instagram</a>
-        <a href="https://YOUR_HANDLE.smugmug.com" target="_blank" class="archive-btn">SmugMug</a>
-        <a href="https://flickr.com/photos/YOUR_HANDLE" target="_blank" class="archive-btn">Flickr</a>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         Launch — Hillclimb, AHS1 Pine MTN
+        </strong>
+        Canon EOS R · 1/1600s · f/4 · ISO 400
+       </div>
       </div>
-
+     </div>
+     <div class="g-item" data-cat="environmental">
+      <div class="g-item-inner">
+       <img alt="kidsondock" class="other-img" src="Mats/formV.JPG">
+       </img>
+      </div>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         Formula Vee At the Fanfest in Pineville KY
+        </strong>
+        Canon EOS T3i · 1/250s · f/8 · ISO 1100
+       </div>
+      </div>
+     </div>
+     <div class="g-item" data-cat="motorsports">
+      <div class="g-item-inner">
+       <img alt="2026 Charlotte National SOLO" class="other-img" src="Mats/rickcone.jpg">
+       </img>
+      </div>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         Rick Cone on Course In Charlotte (SOLO)
+        </strong>
+        Canon EOS R · 1/2000s · f/2.8 · ISO 800
+       </div>
+      </div>
+     </div>
+     <div class="g-item" data-cat="environmental">
+      <div class="g-item-inner">
+       <img alt="2026DYW Pic2" class="other-img" src="Mats/s2k.JPG">
+       </img>
+      </div>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         Honda S2000 On the Blue Ridge Parkway
+        </strong>
+        Canon EOS R · 4s · f/11 · ISO 100
+       </div>
+      </div>
+     </div>
+     <div class="g-item" data-cat="motorsports">
+      <div class="g-item-inner">
+       <img alt="2026DYW Pic2" class="other-img" src="Mats/purpmiat.JPG">
+       </img>
+      </div>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         2004 (NB) Miata @ Home
+        </strong>
+        Canon EOS T3I · 1/1250s · f/5.6 · ISO 640
+       </div>
+      </div>
+     </div>
+     <div class="g-item" data-cat="environmental">
+      <div class="g-item-inner">
+       <img alt="2026DYW Pic2" class="other-img" src="Mats/25 PINE - Lotus Rear Qtr .JPG">
+       </img>
+      </div>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         Flag Rock Hillclimb - YR4
+        </strong>
+        Canon EOS R · 1/500s · f/6.3 · ISO 400
+       </div>
+      </div>
+     </div>
+     <div class="g-item" data-cat="motorsports">
+      <div class="g-item-inner">
+       <img alt="26Targa Texas Day2" class="other-img" src="Mats/_MG_7495.JPG">
+       </img>
+      </div>
+      <div class="g-overlay">
+       <div class="g-caption">
+        <strong>
+         2026 Targa Texas-Ish Day 2 Hallett
+        </strong>
+        Canon EOS T3I · 1/320s · f/4 · ISO 200
+       </div>
+      </div>
+     </div>
     </div>
+    <!-- Archive links -->
+    <div class="gallery-archive-row">
+     <span class="archive-label">
+      Full archive →
+     </span>
+     <a class="archive-btn" href="https://instagram.com/ActivismPhotography" target="_blank">
+      Instagram
+     </a>
+     <a class="archive-btn" href="https://www.flickr.com/photos/204679926@N02" target="_blank">
+      Flickr
+     </a>
+    </div>
+   </div>
   </div>
+
 
   <!-- ABOUT -->
   <div id="about">
-    <div class="section-wrap">
-      <p class="dateline">Profile — Fisher Armstrong</p>
-      <h2 class="section-hed">About</h2>
-      <p class="section-deck">Photographer, Environmentalist, Engineer, and Developer</p>
-      <hr class="col-rule" />
-
-      <div class="about-layout">
-        <div>
-          <div class="about-portrait">
-            <img src="Mats/PFP.JPEG" alt="Fisher Armstrong" class="portrait-img" />
-            <div class="portrait-lines"></div>
-            <div class="portrait-caption">
-              Fisher Armstrong<br>
-              <em>Appalachian Native & Do-er of Things</em>
-            </div>
-          </div>
+   <div class="section-wrap">
+    <p class="dateline">
+     Profile — Fisher Armstrong
+    </p>
+    <h2 class="section-hed">
+     About
+    </h2>
+    <p class="section-deck">
+     Photographer, Environmentalist, Engineer, and Developer
+    </p>
+    <hr class="col-rule"/>
+    <div class="about-layout">
+     <div>
+      <div class="about-portrait">
+       <img alt="Fisher Armstrong" class="portrait-img" src="Mats/PFP.JPEG">
+        <div class="portrait-lines">
         </div>
-
-        <div class="about-body">
-          <div class="pull-quote">"The photograph is proof the moment happened."</div>
-          <p>
-            <strong>ActivismPhotography</strong> is the visual and documentary practice of
+        <div class="portrait-caption">
+         Fisher Armstrong
+         <br/>
+         <em>
+          Appalachian Native &amp; Do-er of Things
+         </em>
+        </div>
+       </img>
+      </div>
+     </div>
+     <div class="about-body">
+      <div class="pull-quote">
+       "The photograph is proof the moment happened."
+      </div>
+      <p>
+       <strong>
+        ActivismPhotography
+       </strong>
+       is the visual and documentary practice of
             Fisher Armstrong - a photographer and engineer working at the intersection of
             motorsports culture, environmental record, and ethical representation. Based in
             Western North Carolina, the work draws directly from the landscape and community
             that surrounds it.
-          </p>
-          <p>
-            The practice is built around two disciplines that, on the surface, look nothing
+      </p>
+      <p>
+       The practice is built around two disciplines that, on the surface, look nothing
             alike. The first is grassroots motorsports — autocross, hillclimb, time trial —
             the compressed, chaotic, unsponsored racing that happens at the edges of the
             calendar. The second is the Appalachian environment itself: the ridgelines,
             river basins, fog valleys, and treelines of Western NC and the surrounding
             mountain region.
-          </p>
-          <p>
-            Both disciplines demand the same thing from the photographer: attention to what
+      </p>
+      <p>
+       Both disciplines demand the same thing from the photographer: attention to what
             is actually happening, not what would make a clean composition. A car at full
             commitment through a hillclimb stage looks different from a clean editorial
             shot. A ridgeline at dawn looks different from a landscape postcard. The work
             tries to hold that difference rather than erase it.
-          </p>
-          <p>
-            The practice operates under a principle of <strong>narrative depth over
-            aesthetics</strong>. Every image is part of a historical record. The archive
+      </p>
+      <p>
+       The practice operates under a principle of
+       <strong>
+        narrative depth over
+            aesthetics
+       </strong>
+       . Every image is part of a historical record. The archive
             is organized with that in mind — structured, searchable, and built to last.
             Nothing is shot for the sake of the shot alone.
-          </p>
-          <p>
-            Armstrong also competes in the events he documents through
-            <strong>Activism Motorsports</strong>, which gives the motorsports work
-            a rare inside perspective — the understanding of what a driver experiences
-            informs what a camera should be looking for.
-          </p>
-        </div>
-      </div>
+      </p>
+      <p>
+      </p>
+     </div>
     </div>
+   </div>
   </div>
-
   <!-- PRINTS -->
   <div id="prints">
-    <div class="section-wrap">
-      <p class="dateline">Limited editions — Fine art prints</p>
-      <h2 class="section-hed">Print Shop</h2>
-      <p class="section-deck">Archival giclée prints on fine art paper. Numbered and signed.</p>
-      <hr class="col-rule" />
-
-      <div class="prints-grid">
-        <div class="print-item">
-          <div class="print-thumb"><span class="print-thumb-text">01</span></div>
-          <p class="print-edition">Edition of 25 — Motorsports</p>
-          <h3 class="print-title">Autocross Launch Sequence</h3>
-          <p class="print-meta">16×20 in · Archival giclée<br>Hahnemühle Photo Rag · Signed</p>
-          <p class="print-price">$180</p>
-          <a href="#booking" class="print-cta">Inquire →</a>
-        </div>
-        <div class="print-item">
-          <div class="print-thumb"><span class="print-thumb-text">02</span></div>
-          <p class="print-edition">Edition of 15 — Environmental</p>
-          <h3 class="print-title">Blue Ridge @ Dawn</h3>
-          <p class="print-meta">20×24 in · Archival giclée<br>Hahnemühle Photo Rag · Signed</p>
-          <p class="print-price">$240</p>
-          <a href="#booking" class="print-cta">Inquire →</a>
-        </div>
-        <div class="print-item">
-          <div class="print-thumb"><span class="print-thumb-text">03</span></div>
-          <p class="print-edition">Edition of 20 — Motorsports</p>
-          <h3 class="print-title">Flag Rock Hillclimb Stage</h3>
-          <p class="print-meta">16×20 in · Archival giclée<br>Hahnemühle Photo Rag · Signed</p>
-          <p class="print-price">$180</p>
-          <a href="#booking" class="print-cta">Inquire →</a>
-        </div>
+   <div class="section-wrap">
+    <p class="dateline">
+     Limited editions — Fine art prints
+    </p>
+    <h2 class="section-hed">
+     Print Shop
+    </h2>
+    <p class="section-deck">
+     Archival giclée prints on fine art paper. Numbered and signed.
+    </p>
+    <hr class="col-rule"/>
+    <div class="prints-grid">
+     <div class="print-item">
+      <div class="print-thumb">
+       <span class="print-thumb-text">
+        01
+       </span>
       </div>
+      <p class="print-edition">
+       Edition of 25 — Motorsports
+      </p>
+      <h3 class="print-title">
+       Autocross Launch Sequence
+      </h3>
+      <p class="print-meta">
+       16×20 in · Archival giclée
+       <br/>
+       Hahnemühle Photo Rag · Signed
+      </p>
+      <p class="print-price">
+       $180
+      </p>
+      <a class="print-cta" href="#booking">
+       Inquire →
+      </a>
+     </div>
+     <div class="print-item">
+      <div class="print-thumb">
+       <span class="print-thumb-text">
+        02
+       </span>
+      </div>
+      <p class="print-edition">
+       Edition of 15 — Environmental
+      </p>
+      <h3 class="print-title">
+       Blue Ridge @ Dawn
+      </h3>
+      <p class="print-meta">
+       20×24 in · Archival giclée
+       <br/>
+       Hahnemühle Photo Rag · Signed
+      </p>
+      <p class="print-price">
+       $240
+      </p>
+      <a class="print-cta" href="#booking">
+       Inquire →
+      </a>
+     </div>
+     <div class="print-item">
+      <div class="print-thumb">
+       <span class="print-thumb-text">
+        03
+       </span>
+      </div>
+      <p class="print-edition">
+       Edition of 20 — Motorsports
+      </p>
+      <h3 class="print-title">
+       Flag Rock Hillclimb Stage
+      </h3>
+      <p class="print-meta">
+       16×20 in · Archival giclée
+       <br/>
+       Hahnemühle Photo Rag · Signed
+      </p>
+      <p class="print-price">
+       $180
+      </p>
+      <a class="print-cta" href="#booking">
+       Inquire →
+      </a>
+     </div>
     </div>
+   </div>
   </div>
-
   <!-- BOOKING -->
   <div id="booking">
-    <div class="section-wrap">
-      <p class="dateline">Inquiries — Booking &amp; licensing</p>
-      <h2 class="section-hed">Book a Shoot</h2>
-      <p class="section-deck">Open for event coverage, editorial licensing, and documentary commissions.</p>
-      <hr class="col-rule" />
-
-      <div class="booking-layout">
-        <div class="booking-info">
-          <div class="booking-types">
-            <div class="booking-type">
-              <span class="bt-num">01</span>
-              <div>
-                <p class="bt-name">Event Coverage</p>
-                <p class="bt-desc">Motorsports events, races, and championships — autocross, hillclimb, and time trial. Full-day or half-day coverage. RAW archive plus edited selects with same-week delivery. Travel available across the Appalachian region and Southeast.</p>
-              </div>
-            </div>
-            <div class="booking-type">
-              <span class="bt-num">02</span>
-              <div>
-                <p class="bt-name">Documentary Commission</p>
-                <p class="bt-desc">Multi-session, sustained documentary work for environmental, cultural, or organizational projects. Built for subjects that require return visits and patience rather than a single shoot. Conservation organizations, land trusts, and regional publications are welcome to reach out.</p>
-              </div>
-            </div>
-            <div class="booking-type">
-              <span class="bt-num">03</span>
-              <div>
-                <p class="bt-name">Editorial Licensing</p>
-                <p class="bt-desc">Print and digital licensing of existing archive images — motorsports and Appalachian environmental — for editorial, publishing, and commercial use. Contact for rates and usage terms. High-resolution files available immediately for licensed use.</p>
-              </div>
-            </div>
-            <div class="booking-type">
-              <span class="bt-num">04</span>
-              <div>
-                <p class="bt-name">Print Inquiry</p>
-                <p class="bt-desc">Questions about limited edition prints, custom sizes, or display licensing. All prints are archival giclée on Hahnemühle Photo Rag, numbered and signed. Custom sizing and substrate options available on request.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+   <div class="section-wrap">
+    <p class="dateline">
+     Inquiries — Booking &amp; licensing
+    </p>
+    <h2 class="section-hed">
+     Book a Shoot
+    </h2>
+    <p class="section-deck">
+     Open for event coverage, editorial licensing, and documentary commissions.
+    </p>
+    <hr class="col-rule"/>
+    <div class="booking-layout">
+     <div class="booking-info">
+      <div class="booking-types">
+       <div class="booking-type">
+        <span class="bt-num">
+         01
+        </span>
         <div>
-          <div class="booking-form">
-            <div class="form-row">
-              <label class="form-lbl">Your name</label>
-              <input class="form-inp" type="text" id="b-name" placeholder="Full name" />
-            </div>
-            <div class="form-row">
-              <label class="form-lbl">Email address</label>
-              <input class="form-inp" type="email" id="b-email" placeholder="your@email.com" />
-            </div>
-            <div class="form-row">
-              <label class="form-lbl">Type of inquiry</label>
-              <select class="form-sel" id="b-type">
-                <option value="">Select one</option>
-                <option>Event Coverage</option>
-                <option>Documentary Commission</option>
-                <option>Editorial Licensing</option>
-                <option>Print Inquiry</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <label class="form-lbl">Date / timeframe</label>
-              <input class="form-inp" type="text" id="b-date" placeholder="e.g. June 2026, ongoing, flexible" />
-            </div>
-            <div class="form-row">
-              <label class="form-lbl">Tell me about the project</label>
-              <textarea class="form-txt" id="b-msg" placeholder="Event, location, scope, any relevant details..."></textarea>
-            </div>
-            <div class="submit-row">
-              <span class="submit-note">Response within 48 hours.</span>
-              <button class="btn-submit" onclick="handleBooking()">Send Inquiry</button>
-            </div>
-            <p id="booking-feedback"></p>
-          </div>
+         <p class="bt-name">
+          Event Coverage
+         </p>
+         <p class="bt-desc">
+          Motorsports events, races, and championships — autocross, hillclimb, and time trial. Full-day or half-day coverage. RAW archive plus edited selects with same-week delivery. Travel available across the Appalachian region and Southeast.
+         </p>
         </div>
+       </div>
+       <div class="booking-type">
+        <span class="bt-num">
+         02
+        </span>
+        <div>
+         <p class="bt-name">
+          Documentary Commission
+         </p>
+         <p class="bt-desc">
+          Multi-session, sustained documentary work for environmental, cultural, or organizational projects. Built for subjects that require return visits and patience rather than a single shoot. Conservation organizations, land trusts, and regional publications are welcome to reach out.
+         </p>
+        </div>
+       </div>
+       <div class="booking-type">
+        <span class="bt-num">
+         03
+        </span>
+        <div>
+         <p class="bt-name">
+          Editorial Licensing
+         </p>
+         <p class="bt-desc">
+          Print and digital licensing of existing archive images — motorsports and Appalachian environmental — for editorial, publishing, and commercial use. Contact for rates and usage terms. High-resolution files available immediately for licensed use.
+         </p>
+        </div>
+       </div>
+       <div class="booking-type">
+        <span class="bt-num">
+         04
+        </span>
+        <div>
+         <p class="bt-name">
+          Print Inquiry
+         </p>
+         <p class="bt-desc">
+          Questions about limited edition prints, custom sizes, or display licensing. All prints are archival giclée on Hahnemühle Photo Rag, numbered and signed. Custom sizing and substrate options available on request.
+         </p>
+        </div>
+       </div>
       </div>
+     </div>
+     <div>
+      <div class="booking-form">
+       <div class="form-row">
+        <label class="form-lbl">
+         Your name
+        </label>
+        <input class="form-inp" id="b-name" placeholder="Full name" type="text"/>
+       </div>
+       <div class="form-row">
+        <label class="form-lbl">
+         Email address
+        </label>
+        <input class="form-inp" id="b-email" placeholder="your@email.com" type="email"/>
+       </div>
+       <div class="form-row">
+        <label class="form-lbl">
+         Type of inquiry
+        </label>
+        <select class="form-sel" id="b-type">
+         <option value="">
+          Select one
+         </option>
+         <option>
+          Event Coverage
+         </option>
+         <option>
+          Documentary Commission
+         </option>
+         <option>
+          Editorial Licensing
+         </option>
+         <option>
+          Print Inquiry
+         </option>
+         <option>
+          Other
+         </option>
+        </select>
+       </div>
+       <div class="form-row">
+        <label class="form-lbl">
+         Date / timeframe
+        </label>
+        <input class="form-inp" id="b-date" placeholder="e.g. June 2026, ongoing, flexible" type="text"/>
+       </div>
+       <div class="form-row">
+        <label class="form-lbl">
+         Tell me about the project
+        </label>
+        <textarea class="form-txt" id="b-msg" placeholder="Event, location, scope, any relevant details..."></textarea>
+       </div>
+       <div class="submit-row">
+        <span class="submit-note">
+         Response within 48 hours.
+        </span>
+        <button class="btn-submit" onclick="handleBooking()">
+         Send Inquiry
+        </button>
+       </div>
+       <p id="booking-feedback">
+       </p>
+      </div>
+     </div>
     </div>
+   </div>
   </div>
-
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <p class="footer-brand">Activism<span>.</span>Photography</p>
-      <p class="footer-note">© 2026 Fisher Armstrong · All rights reserved · Western North Carolina</p>
-    </div>
+   <div class="footer-inner">
+    <p class="footer-brand">
+     Activism
+     <span>
+      .
+     </span>
+     Photography
+    </p>
+    <p class="footer-note">
+     © 2026 Fisher Armstrong · All rights reserved · Western North Carolina
+    </p>
+   </div>
   </footer>
-
   <script>
-    // Scroll fade-in
+   // Scroll fade-in
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1286,5 +1535,5 @@
       document.getElementById('b-date').value = '';
     }
   </script>
-</body>
+ </body>
 </html>
